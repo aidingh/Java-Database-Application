@@ -1,4 +1,4 @@
-package Models;
+package com.example.javadatabaseproject.Models;
 
 public class Customer {
     public int id;
