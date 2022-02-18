@@ -1,7 +1,6 @@
 package com.example.javadatabaseproject;
 import java.sql.*;
 
-import ConnectionManagers.ConnectionManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,12 +12,12 @@ public class JavaDatabaseProjectApplication {
 
     public static void main(String[] args) throws SQLException {
 
-        //SpringApplication.run(JavaDatabaseProjectApplication.class, args);
+        SpringApplication.run(JavaDatabaseProjectApplication.class, args);
 
-        ConnectionManager connectionManager = new ConnectionManager();
-        connectionManager.connectManager();
-        connectionManager.runSqlCommand(getCustomerQUERY);
-        connectionManager.printTable();
+       // ConnectionManager connectionManager = new ConnectionManager();
+       // connectionManager.connectManager();
+       // connectionManager.runSqlCommand(getCustomerQUERY);
+      //  connectionManager.printTable();
 
         }
 }

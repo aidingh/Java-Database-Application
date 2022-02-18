@@ -1,4 +1,4 @@
-package ConnectionManagers;
+package com.example.javadatabaseproject.ConnectionManagers;
 import java.sql.*;
 
 public class ConnectionManager {
