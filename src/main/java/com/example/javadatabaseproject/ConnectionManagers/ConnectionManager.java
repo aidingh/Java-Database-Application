@@ -19,6 +19,14 @@ public class ConnectionManager {
         }
     }
 
+    public void closeConnectManager(){
+        try{
+            driverConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void runSqlCommand(String QUERY) throws SQLException {
         this.set = this.driverConnection.createStatement().executeQuery(QUERY);
     }
