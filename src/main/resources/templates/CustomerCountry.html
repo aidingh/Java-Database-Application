@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styling.css}"/>
+</head>
+<body>
+
+<div class="row">
+    <div class=card>
+        <p>All customer by country.</p>
+        <table class="center" th:object="${customerByCountry}" id="customerTable" border="1">
+            <tr>
+                <th>Country</th>
+                <th>NumberOfCountries</th>
+
+            </tr>
+            <tr th:each="user :${customerByCountry}">
+                <td th:text="${user.getCountry()}"></td>
+                <td th:text="${user.getQuantity()}"></td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
