@@ -3,9 +3,7 @@ package com.example.javadatabaseproject.controllers.rest;
 import com.example.javadatabaseproject.models.Customer;
 import com.example.javadatabaseproject.repositories.CustomerRepository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,12 +12,6 @@ import java.util.ArrayList;
 public class CustomerController {
 
     CustomerRepository customerRepo = new CustomerRepository();
-
-    /*@RequestMapping(value = "/api/")
-    public String home(Model model){
-        model.addAttribute("greeting", "Welcome buskin");
-        return "home";
-    }*/
 
    @GetMapping("/api/")
     public String index(){
@@ -31,6 +23,12 @@ public class CustomerController {
     public ArrayList<Customer> getCustomer() throws SQLException {
        customerRepo.establishConnection();
        return customerRepo.getAllCustomers();
+   }
+
+   @RequestMapping(value = "/api/customer/add", method = RequestMethod.POST)
+    public boolean addNewCustomer(@RequestBody Customer customer) throws  SQLException{
+       customerRepo.establishConnection();
+       return customerRepo.addNewCustomer(customer);
    }
 
 

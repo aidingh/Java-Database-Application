@@ -6,7 +6,7 @@ public class ConnectionManager {
     public String URL = "jdbc:sqlite::resource:Chinook_Sqlite.sqlite";
     public Connection driverConnection;
     public ResultSet set;
-
+    public PreparedStatement prepStatement;
     public ConnectionManager() {
 
     }
@@ -29,6 +29,10 @@ public class ConnectionManager {
 
     public void runSqlCommand(String QUERY) throws SQLException {
         this.set = this.driverConnection.createStatement().executeQuery(QUERY);
+    }
+    public void runUpdateSqlCommand(String QUERY) throws  SQLException {
+        this.prepStatement = this.driverConnection.prepareStatement(QUERY);
+
     }
 
     public void printTable() throws SQLException {
