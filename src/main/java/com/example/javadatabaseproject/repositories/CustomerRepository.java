@@ -2,18 +2,27 @@ package com.example.javadatabaseproject.repositories;
 
 import com.example.javadatabaseproject.ConnectionManagers.ConnectionManager;
 import com.example.javadatabaseproject.models.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class CustomerRepository {
+@Repository
+public class CustomerRepository{
 
     ConnectionManager connectionManager = new ConnectionManager();
 
+    public CustomerRepository() {
+        this.establishConnection();
+    }
 
-    public void establishConnection() throws SQLException {
+    public void establishConnection(){
         connectionManager.connectManager();
-        connectionManager.runSqlCommand("SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM customer");
+    }
+
+    public void runSql(String QUERY) throws SQLException {
+        connectionManager.prepareSqlQuery(QUERY);
     }
 
     public ArrayList<Customer> getAllCustomers() throws SQLException {
@@ -22,7 +31,7 @@ public class CustomerRepository {
             customers.add(
                     new Customer(
                             connectionManager.set.getInt("customerId"),
-                            connectionManager.set.getString("lastName"),
+                            connectionManager.set.getString("firstName"),
                             connectionManager.set.getString("lastName"),
                             connectionManager.set.getString("country"),
                             connectionManager.set.getString("postalCode"),
@@ -33,4 +42,23 @@ public class CustomerRepository {
         }
         return customers;
     }
+
+    public Customer getCustomerById() throws SQLException {
+
+        Customer tempCustomer = null;
+        while (connectionManager.set.next()) {
+            tempCustomer = new Customer(
+                    connectionManager.set.getInt("customerId"),
+                    connectionManager.set.getString("firstName"),
+                    connectionManager.set.getString("lastName"),
+                    connectionManager.set.getString("country"),
+                    connectionManager.set.getString("postalCode"),
+                    connectionManager.set.getString("phone"),
+                    connectionManager.set.getString("email")
+            );
+
+        }
+        return tempCustomer;
+    }
+
 }

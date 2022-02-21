@@ -27,8 +27,12 @@ public class ConnectionManager {
         }
     }
 
-    public void runSqlCommand(String QUERY) throws SQLException {
+    public void createSqlQuery(String QUERY) throws SQLException {
         this.set = this.driverConnection.createStatement().executeQuery(QUERY);
+    }
+
+    public void prepareSqlQuery(String QUERY) throws SQLException {
+        this.set = this.driverConnection.prepareStatement(QUERY).executeQuery();
     }
 
     public void printTable() throws SQLException {

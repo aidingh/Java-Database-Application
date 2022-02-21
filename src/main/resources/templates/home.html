@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styling.css}"/>
 </head>
 <body>
-<p>iam alive</p>
-<h3>HI DUDE</h3>
-<h1 th:text="${greeting}"></h1>
-<h1 th:text="${greeting}"></h1>
+
+<div class="row">
+    <div class=card>
+    <h1 th:text="${greeting}"></h1>
+    <p>Try out our endpoints below or specify your own</p>
+    </div>
+</div>
 </body>
 </html>
