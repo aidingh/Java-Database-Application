@@ -10,7 +10,7 @@ public class ArtistMapper implements RowMapper<Artists> {
     @Override
     public Artists mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Artists(
-                rs.getString("TrackName"),
+                rs.getString("trackName"),
                 rs.getString("artistName"),
                 rs.getString("titleName"),
                 rs.getString("genreName")

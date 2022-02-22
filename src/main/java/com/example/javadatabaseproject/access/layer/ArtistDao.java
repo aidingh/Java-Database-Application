@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ArtistDao{
     List<Artists> getArtistData(String keyWord);
-    List<Music> getMusicData();
+    List<Artists> getMusicData();
 }
