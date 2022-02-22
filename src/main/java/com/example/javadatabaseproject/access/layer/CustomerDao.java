@@ -12,7 +12,7 @@ public interface CustomerDao{
     Customer getCustomerById(String id);
     Customer getCustomerByName(String name);
     List<Customer> getSubsetOfCustomers(String limit, String offset);
-    boolean insertCustomer(Customer customer);
+    Customer insertCustomer(Customer customer);
     Customer updateCustomer(Customer customer);
     List<CustomerCountry> getCustomerByCountry();
     List<CustomerSpender> getHighestSpender();

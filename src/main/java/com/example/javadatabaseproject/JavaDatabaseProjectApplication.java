@@ -24,14 +24,14 @@ public class JavaDatabaseProjectApplication {
     static final String getCustomerOffsetQUERY = "SELECT " + attributes +
             " FROM customer ORDER BY FirstName LIMIT " + limit + " OFFSET " + offset;
 
-
+    static final String trackQuery = "SELECT name FROM Track";
     public static void main(String[] args) throws SQLException {
 
         SpringApplication.run(JavaDatabaseProjectApplication.class, args);
 
         ConnectionManager connectionManager = new ConnectionManager();
         connectionManager.connectManager();
-        connectionManager.prepareSqlQuery(getCustomerOffsetQUERY);
+        connectionManager.prepareSqlQuery(trackQuery);
         connectionManager.printTable();
 
         }

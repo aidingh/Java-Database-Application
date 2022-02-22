@@ -5,7 +5,7 @@ import com.example.javadatabaseproject.models.*;
 import com.example.javadatabaseproject.mappers.CountryMapper;
 import com.example.javadatabaseproject.mappers.HighestSpenderMapper;
 import com.example.javadatabaseproject.mappers.PopularGenreMapper;
-import com.example.javadatabaseproject.mappers.CustomerRowMapper;
+import com.example.javadatabaseproject.mappers.CustomerMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -23,20 +23,20 @@ public class CustomerRepository implements CustomerDao {
     @Override
     public List<Customer> getAllCustomers() {
         String query = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM customer ORDER BY FirstName";
-        return this.jdbcTemplate.query(query, new CustomerRowMapper());
+        return this.jdbcTemplate.query(query, new CustomerMapper());
     }
 
     @Override
     public Customer getCustomerById(String id) {
         String query = "SELECT " + attributes + " FROM customer WHERE CustomerId" + "=" + id;
-        return this.jdbcTemplate.queryForObject(query, new CustomerRowMapper());
+        return this.jdbcTemplate.queryForObject(query, new CustomerMapper());
     }
 
     @Override
     public Customer getCustomerByName(String name) {
         String query = "SELECT " + attributes + " FROM customer " +
                 "WHERE FirstName LIKE " +"'%" + name + "%'";
-        return this.jdbcTemplate.queryForObject(query, new CustomerRowMapper());
+        return this.jdbcTemplate.queryForObject(query, new CustomerMapper());
     }
 
     @Override
@@ -53,15 +53,14 @@ public class CustomerRepository implements CustomerDao {
             sql.append(limit);
             sql.append(" ");
         }
-        return this.jdbcTemplate.query(sql.toString(), new CustomerRowMapper());
+        return this.jdbcTemplate.query(sql.toString(), new CustomerMapper());
     }
 
     @Override
-    public boolean insertCustomer(Customer customer) {
-        String query = "INSERT INTO customer(CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email) VALUES (?,?,?,?,?,?,?)";
-       this.jdbcTemplate.update(query,
-               customer.customerId, customer.firstName,customer.lastName,customer.country, customer.postalCode,customer.phone,customer.email);
-       return true;
+    public Customer insertCustomer(Customer customer) {
+       String query = "INSERT INTO customer(CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email) VALUES (?,?,?,?,?,?,?)";
+       this.jdbcTemplate.update(query, customer.customerId, customer.firstName,customer.lastName,customer.country, customer.postalCode,customer.phone,customer.email);
+       return customer;
     }
 
     @Override
@@ -82,6 +81,7 @@ public class CustomerRepository implements CustomerDao {
                        "ORDER BY NumberOfCountries DESC;";
         return this.jdbcTemplate.query(query, new CountryMapper());
     }
+
     @Override
     public List<CustomerSpender> getHighestSpender() {
         String query = "SELECT FirstName, LastName, SUM(Invoice.Total) AS HighestSpender " +
@@ -107,6 +107,7 @@ public class CustomerRepository implements CustomerDao {
                              "SELECT POPULAR_CUSTOMER.* " +
                              "FROM POPULAR_CUSTOMER " +
                              "WHERE POPULAR_CUSTOMER.QUANTITY = (SELECT max(POPULAR_CUSTOMER.QUANTITY) FROM POPULAR_CUSTOMER);";
+
         return this.jdbcTemplate.query(query, new PopularGenreMapper(),id);
     }
 
