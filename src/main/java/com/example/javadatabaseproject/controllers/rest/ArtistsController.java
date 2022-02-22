@@ -4,6 +4,7 @@ package com.example.javadatabaseproject.controllers.rest;
 import com.example.javadatabaseproject.access.layer.ArtistDao;
 import com.example.javadatabaseproject.models.Artists;
 import com.example.javadatabaseproject.models.CustomerGenre;
+import com.example.javadatabaseproject.models.Music;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,20 +22,21 @@ public class ArtistsController {
         this.artistDao = artistDao;
     }
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home(Artists artists, Model model, String keyword) {
+    //@RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(path = {"/","/search"})
+    public String home(Model model, String keyword) {
         model.addAttribute("greeting", "Welcome");
-        //model.addAttribute("artists", artistDao.getArtistData());
+
         System.out.println(keyword);
-        if(keyword!=null) {
-            //List<Artists> list = artistDao.getArtistData();
+        //if(keyword != null) {
+            List<Artists> list = artistDao.getArtistData(keyword);
+            model.addAttribute("list", list);
+        //}else {
+            //List<Music> list = artistDao.getMusicData();
             //model.addAttribute("list", list);
-        }else {
-            //List<Shop> list = service.getAllShops();
-            //model.addAttribute("list", list);
-           List<Artists> list = artistDao.getArtistData();
-           model.addAttribute("list", list);
-        }
+        //}
+        //List<Artists> list = artistDao.getArtistData("Cochise");
+        //model.addAttribute("list", list);
         return "home";
     }
 

@@ -5,5 +5,6 @@ import com.example.javadatabaseproject.models.*;
 import java.util.List;
 
 public interface ArtistDao{
-    List<Artists> getArtistData();
+    List<Artists> getArtistData(String keyWord);
+    List<Music> getMusicData();
 }
