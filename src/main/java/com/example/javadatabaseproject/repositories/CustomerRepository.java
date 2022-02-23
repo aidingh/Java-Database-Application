@@ -42,25 +42,26 @@ public class CustomerRepository implements CustomerDao {
     @Override
     public List<Customer> getSubsetOfCustomers(String limit, String offset) {
 
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM customer ");
-        if (Integer.parseInt(limit) > 0) {
-            sql.append("LIMIT ");
-            if (Integer.parseInt(offset) > 0) {
-                sql.append(offset);
-                sql.append(", ");
+        StringBuilder queryBuilder = new StringBuilder();
+        String query = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM customer ";
+        queryBuilder.append(query);
+        if(Integer.parseInt(limit) > 0) {
+            queryBuilder.append("LIMIT ");
+            if(Integer.parseInt(offset) > 0) {
+                queryBuilder.append(offset);
+                queryBuilder.append(", ");
             }
-            sql.append(limit);
-            sql.append(" ");
+            queryBuilder.append(limit);
+            queryBuilder.append(" ");
         }
-        return this.jdbcTemplate.query(sql.toString(), new CustomerMapper());
+        return this.jdbcTemplate.query(queryBuilder.toString(), new CustomerMapper());
     }
 
     @Override
     public Customer insertCustomer(Customer customer) {
        String query = "INSERT INTO customer(CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email) VALUES (?,?,?,?,?,?,?)";
        this.jdbcTemplate.update(query, customer.customerId, customer.firstName,customer.lastName,customer.country, customer.postalCode,customer.phone,customer.email);
-       return customer;
+       return this.getCustomerById(String.valueOf(customer.customerId));
     }
 
     @Override
@@ -70,7 +71,7 @@ public class CustomerRepository implements CustomerDao {
                        "WHERE CustomerId = ?";
 
        this.jdbcTemplate.update(query, customer.firstName,customer.lastName,customer.country, customer.postalCode,customer.phone,customer.email, customer.customerId);
-       return customer;
+       return this.getCustomerById(String.valueOf(customer.customerId));
     }
 
     @Override
@@ -110,6 +111,4 @@ public class CustomerRepository implements CustomerDao {
 
         return this.jdbcTemplate.query(query, new PopularGenreMapper(),id);
     }
-
-
 }
