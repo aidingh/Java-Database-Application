@@ -1,5 +1,9 @@
 package com.example.javadatabaseproject.models;
 
+/**
+ * @author Aidin Ghassemloi och Richard Cruz.
+ * CustomerCountry model and its attributes.
+ */
 public class CustomerCountry {
 
  private String country;

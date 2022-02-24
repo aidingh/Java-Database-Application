@@ -1,6 +1,10 @@
 package com.example.javadatabaseproject.models;
 
 import org.springframework.stereotype.Component;
+/**
+ * @author Aidin Ghassemloi och Richard Cruz.
+ * Customer model and its attributes.
+ */
 
 @Component
 public class Customer {

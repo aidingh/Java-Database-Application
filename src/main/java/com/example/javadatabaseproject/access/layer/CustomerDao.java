@@ -7,6 +7,10 @@ import com.example.javadatabaseproject.models.CustomerSpender;
 
 import java.util.List;
 
+/**
+ * @author Aidin Ghassemloi och Richard Cruz.
+ * Data access objects for customers. Implemented by CustomerRepository class.
+ */
 public interface CustomerDao{
     List<Customer> getAllCustomers();
     Customer getCustomerById(String id);

@@ -1,5 +1,9 @@
 package com.example.javadatabaseproject.models;
 
+/**
+ * @author Aidin Ghassemloi och Richard Cruz.
+ * Artist model and its attributes.
+ */
 public class Artists {
 
     public String trackName;

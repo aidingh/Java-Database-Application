@@ -1,5 +1,9 @@
 package com.example.javadatabaseproject.models;
 
+/**
+ * @author Aidin Ghassemloi och Richard Cruz.
+ * CustomerSpender model and its attributes.
+ */
 public class CustomerSpender {
 
     private String firstName;

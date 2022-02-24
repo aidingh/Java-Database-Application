@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+/**
+ * @author Aidin Ghassemloi och Richard Cruz.
+ * Repository class implmenets artist data access object.
+ * Class is responseble for handeling querys and map the results back to the controller class.
+ */
+
 @Repository
 public class ArtistsRepository implements ArtistDao {
 
@@ -16,6 +22,13 @@ public class ArtistsRepository implements ArtistDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * Function executes the local query defined in the function and RowMaps its results with a custom mapper.
+     * Custom mapper : ArtistMapper
+     *
+     * @param keyWord search string containing the track searched by the client.
+     * @return List<Artists>
+     */
     @Override
     public List<Artists> getArtistData(String keyWord) {
 
@@ -31,6 +44,13 @@ public class ArtistsRepository implements ArtistDao {
         return this.jdbcTemplate.query(query, new ArtistMapper(), keyWord);
     }
 
+    /**
+     * Function executes the local query defined in the function and RowMaps its results with a custom mapper.
+     * Function will return a list of Artists. But the query defines random artists and displayed to the client.
+     * Custom mapper : ArtistMapper
+     *
+     * @return List<Artists>
+     */
     @Override
     public List<Artists> getMusicData() {
         String query = "SELECT Track.Name AS trackName, " +

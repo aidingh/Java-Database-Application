@@ -1,5 +1,9 @@
 package com.example.javadatabaseproject.models;
 
+/**
+ * @author Aidin Ghassemloi och Richard Cruz.
+ * CustomerGenre model and its attributes.
+ */
 public class CustomerGenre {
 
  private String firstName;
