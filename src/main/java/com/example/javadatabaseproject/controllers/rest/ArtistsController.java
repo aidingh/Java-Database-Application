@@ -32,15 +32,20 @@ public class ArtistsController {
     @RequestMapping(path = {"/home","/search"})
     public String home(Model model, String keyword) {
 
-        model.addAttribute("greeting", "Welcome");
-
         List<Artists> list;
         if(keyword != null) {
-            list = artistDao.getArtistData(keyword);
+            if(keyword.equals("")){
+                list = artistDao.getMusicData();
+            }
+            else{
+                list = artistDao.getArtistData(keyword);
+            }
+            if(list.isEmpty()){
+                list = artistDao.getMusicData();
+            }
         }else{
             list = artistDao.getMusicData();
         }
-
         model.addAttribute("list", list);
         return "home";
     }

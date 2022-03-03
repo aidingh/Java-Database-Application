@@ -40,8 +40,8 @@ public class ArtistsRepository implements ArtistDao {
                      "INNER JOIN Genre G on G.GenreId = Track.GenreId " +
                      "INNER JOIN Album A on A.AlbumId = Track.AlbumId " +
                      "INNER JOIN Artist A2 on A2.ArtistId = A.ArtistId " +
-                     "WHERE Track.Name = ? ";
-        return this.jdbcTemplate.query(query, new ArtistMapper(), keyWord);
+                     "WHERE Track.Name LIKE " +"'%" + keyWord + "%'"  ;
+        return this.jdbcTemplate.query(query, new ArtistMapper());
     }
 
     /**
